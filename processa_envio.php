@@ -61,7 +61,7 @@
 
     //Recipients
     $mail->setFrom('cuso.web2020@gmail.com', 'Web Completo Remetente');
-    $mail->addAddress('cuso.web2020@gmail.com', 'Web Completo Destinatario');     // Add a recipient
+    $mail->addAddress($mensagem->__get('para'));    // Add a recipient
     //$mail->addAddress('ellen@example.com');               // Name is optional
     //$mail->addReplyTo('info@example.com', 'Information');
     //$mail->addCC('cc@example.com');
@@ -73,12 +73,12 @@
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Olá, este é o assunto.';
-    $mail->Body    = 'Oi, eu sou o conteudo do <strong> email</strong> <b>in bold!</b>';
-    $mail->AltBody = 'Oi, eu sou o conteudo do email';
+    $mail->Subject = $mensagem->__GET('assunto');
+    $mail->Body    = $mensagem->__GET('mensagem');
+    $mail->AltBody = 'É necessario usar um cliet que suporte html para ter acesso total ao conteudo dessa mensagem';
 
     $mail->send();
-    echo 'Message has been sent';
+    echo 'Email enviado com sucesso';
 	} catch (Exception $e) {
     echo 'Não foi possivel enviar esse email, tente mais tarde';
     echo 'Detalhes do erro: ' . $mail->ErrorInfo;
